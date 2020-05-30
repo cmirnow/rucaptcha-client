@@ -6,6 +6,8 @@ require 'nokogiri'
 class Rucaptcha
   # Enter here your key to API rucaptcha.com
   APIKEY = '7a15763197586ddfdca673bb4d54b106'
+  # Enter here url page with recaptcha
+  URL_RECAPTCHA = 'https://www.google.com/recaptcha/api2/demo'
 
   def self.first_request
     # Request to API recaptcha.com and getting ID
@@ -14,7 +16,7 @@ class Rucaptcha
       key: APIKEY,
       method: 'userrecaptcha',
       googlekey: data_sitekey,
-      pageurl: url_recaptcha
+      pageurl: URL_RECAPTCHA
     }
     puts 'Request to API ' + target + '...'
     puts 'Getting Request ID...'
@@ -23,17 +25,12 @@ class Rucaptcha
 
   def self.data_sitekey
     # Parsing url and getting a data-sitekey of recaptcha
-    url = url_recaptcha
+    url = URL_RECAPTCHA
     html = open(url)
-    puts 'Parsing ' + url_recaptcha + '...'
+    puts 'Parsing ' + URL_RECAPTCHA + '...'
     doc = Nokogiri::HTML(html)
     puts 'Getting a data-sitekey...'
     doc.xpath('//@data-sitekey')
-  end
-
-  def self.url_recaptcha
-    # Enter here url page with recaptcha
-    'https://www.google.com/recaptcha/api2/demo'
   end
 
   def self.request(target, params)
