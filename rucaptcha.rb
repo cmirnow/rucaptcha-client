@@ -4,16 +4,14 @@ require 'open-uri'
 require 'nokogiri'
 
 class Rucaptcha
-  def self.apikey
-    # Enter here your key to API rucaptcha.com
-    '*******************************'
-  end
+  # Enter here your key to API rucaptcha.com
+  APIKEY = '7a15763197586ddfdca673bb4d54b106'
 
   def self.first_request
     # Request to API recaptcha.com and getting ID
     target = 'https://rucaptcha.com/in.php'
     params = {
-      key: apikey,
+      key: APIKEY,
       method: 'userrecaptcha',
       googlekey: data_sitekey,
       pageurl: url_recaptcha
@@ -52,7 +50,7 @@ class Rucaptcha
     if answer.include? 'OK'
       target = 'https://rucaptcha.com/res.php'
       params = {
-        key: apikey,
+        key: APIKEY,
         action: 'get',
         id: answer.gsub('OK|', '')
       }
