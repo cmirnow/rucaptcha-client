@@ -54,7 +54,7 @@ class Rucaptcha
 
       puts 'Request to API ' + target + '...'
       # Request decision result
-      1.times do |_i|
+      1.times do
         begin
           puts 'Timeout 10 seconds'
           sleep 10
